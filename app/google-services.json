@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "220485285622",
+    "firebase_url": "https://who-said-b2966.firebaseio.com",
+    "project_id": "who-said-b2966",
+    "storage_bucket": "who-said-b2966.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220485285622:android:1410bee484596f62b85ed7",
+        "android_client_info": {
+          "package_name": "br.com.piscioneri.whosaid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220485285622-e7rnqnlv48s8pgj0enc8g1snc9go8bbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU7sie3XtYr9BY3bHk7p2OPpMg2OqcgHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220485285622-e7rnqnlv48s8pgj0enc8g1snc9go8bbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
