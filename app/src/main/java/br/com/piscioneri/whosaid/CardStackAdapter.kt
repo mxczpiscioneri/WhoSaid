@@ -3,15 +3,17 @@ package br.com.piscioneri.whosaid
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import br.com.piscioneri.whosaid.data.Answer
 import br.com.piscioneri.whosaid.data.Phrase
 import com.bumptech.glide.Glide
 
 class CardStackAdapter(
-    private var phrases: List<Phrase> = emptyList()
+    private val phrases: List<Phrase> = emptyList(),
+    private val onClicked: (answer: Answer) -> Unit
 ) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,13 +29,19 @@ class CardStackAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val phrase = phrases[position]
-        holder.name.text = phrase.text
-//        holder.city.text = phrase.city
+        holder.text.text = phrase.text
+        holder.sourceName.text = phrase.source?.name
+        holder.sourceDescription.text = phrase.source?.description
         Glide.with(holder.image)
             .load(phrase.image)
             .into(holder.image)
-        holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, phrase.text, Toast.LENGTH_SHORT).show()
+        holder.answer1.text = phrase.answers?.get(0)?.text
+        holder.answer1.setOnClickListener {
+            onClicked.invoke(phrase.answers?.get(0)!!)
+        }
+        holder.answer2.text = phrase.answers?.get(1)?.text
+        holder.answer2.setOnClickListener {
+            onClicked.invoke(phrase.answers?.get(1)!!)
         }
     }
 
@@ -42,9 +50,12 @@ class CardStackAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.item_name)
-        var city: TextView = view.findViewById(R.id.item_city)
-        var image: ImageView = view.findViewById(R.id.item_image)
+        val text: TextView = view.findViewById(R.id.item_text)
+        val sourceName: TextView = view.findViewById(R.id.item_source_name)
+        val sourceDescription: TextView = view.findViewById(R.id.item_source_description)
+        val image: ImageView = view.findViewById(R.id.item_image)
+        val answer1: Button = view.findViewById(R.id.btn_answer1)
+        val answer2: Button = view.findViewById(R.id.btn_answer2)
     }
 
 }

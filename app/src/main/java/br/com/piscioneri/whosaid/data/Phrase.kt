@@ -2,7 +2,7 @@ package br.com.piscioneri.whosaid.data
 
 data class Phrase(
     val answers: List<Answer>? = null,
-    val id: String = "",
+    var id: String = "",
     val image: String = "",
     val source: Source? = null,
     val text: String = ""

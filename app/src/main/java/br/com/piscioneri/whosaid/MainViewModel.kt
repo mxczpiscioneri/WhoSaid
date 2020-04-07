@@ -3,13 +3,15 @@ package br.com.piscioneri.whosaid
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.piscioneri.whosaid.data.Answer
 import br.com.piscioneri.whosaid.data.Phrase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
 class MainViewModel : ViewModel() {
 
-    private var _phrases: MutableLiveData<List<Phrase>> = MutableLiveData()
+    var phrases: MutableLiveData<List<Phrase>> = MutableLiveData()
+    var result: MutableLiveData<Int> = MutableLiveData(0)
 
     init {
         getPhrases()
@@ -20,19 +22,23 @@ class MainViewModel : ViewModel() {
             .addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.w("MXCZ", "Listen failed.", e)
-                    _phrases.value = null
+                    phrases.value = null
                     return@addSnapshotListener
                 }
 
                 val phraseList: MutableList<Phrase> = mutableListOf()
                 for (doc in value!!) {
                     val phrase = doc.toObject<Phrase>()
+                    phrase.id = doc.id
                     phraseList.add(phrase)
                 }
-                _phrases.value = phraseList
-                Log.d("MXCZ phraseList", phraseList.toString())
+                phrases.value = phraseList
             }
     }
 
-    internal var phrases: MutableLiveData<List<Phrase>> = _phrases
+    fun saveAnswer(answer: Answer) {
+        if (answer.right) {
+            result.value = result.value?.plus(1)
+        }
+    }
 }
