@@ -1,62 +1,38 @@
 package br.com.piscioneri.whosaid
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.piscioneri.whosaid.data.Phrase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class MainViewModel : ViewModel() {
-    private val phrases: MutableLiveData<List<Phrases>> by lazy {
-        MutableLiveData<List<Phrases>>().also {
-            loadPhrases()
-        }
+
+    private var _phrases: MutableLiveData<List<Phrase>> = MutableLiveData()
+
+    init {
+        getPhrases()
     }
 
-    fun getPhrases(): LiveData<List<Phrases>> {
-        return phrases
+    private fun getPhrases() {
+        FirebaseFirestore.getInstance().collection("phrases")
+            .addSnapshotListener { value, e ->
+                if (e != null) {
+                    Log.w("MXCZ", "Listen failed.", e)
+                    _phrases.value = null
+                    return@addSnapshotListener
+                }
+
+                val phraseList: MutableList<Phrase> = mutableListOf()
+                for (doc in value!!) {
+                    val phrase = doc.toObject<Phrase>()
+                    phraseList.add(phrase)
+                }
+                _phrases.value = phraseList
+                Log.d("MXCZ phraseList", phraseList.toString())
+            }
     }
 
-    private fun loadPhrases(): List<Phrases> {
-        val phrases = ArrayList<Phrases>()
-        phrases.add(
-            Phrases(
-                id = 1,
-                name = "Yasaka Shrine",
-                city = "Kyoto",
-                url = "https://source.unsplash.com/Xq1ntWruZQI/600x800"
-            )
-        )
-        phrases.add(
-            Phrases(
-                id = 2,
-                name = "Fushimi Inari Shrine",
-                city = "Kyoto",
-                url = "https://source.unsplash.com/NYyCqdBOKwc/600x800"
-            )
-        )
-        phrases.add(
-            Phrases(
-                id = 3,
-                name = "Bamboo Forest",
-                city = "Kyoto",
-                url = "https://source.unsplash.com/buF62ewDLcQ/600x800"
-            )
-        )
-        phrases.add(
-            Phrases(
-                id = 4,
-                name = "Brooklyn Bridge",
-                city = "New York",
-                url = "https://source.unsplash.com/THozNzxEP3g/600x800"
-            )
-        )
-        phrases.add(
-            Phrases(
-                id = 5,
-                name = "Empire State Building",
-                city = "New York",
-                url = "https://source.unsplash.com/USrZRcRS2Lw/600x800"
-            )
-        )
-        return phrases
-    }
+    internal var phrases: MutableLiveData<List<Phrase>> = _phrases
 }

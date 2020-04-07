@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import br.com.piscioneri.whosaid.data.Phrase
 import com.bumptech.glide.Glide
 
 class CardStackAdapter(
-    private var phrases: List<Phrases> = emptyList()
+    private var phrases: List<Phrase> = emptyList()
 ) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,14 +26,14 @@ class CardStackAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val spot = phrases[position]
-        holder.name.text = "${spot.id}. ${spot.name}"
-        holder.city.text = spot.city
+        val phrase = phrases[position]
+        holder.name.text = phrase.text
+//        holder.city.text = phrase.city
         Glide.with(holder.image)
-            .load(spot.url)
+            .load(phrase.image)
             .into(holder.image)
         holder.itemView.setOnClickListener { v ->
-            Toast.makeText(v.context, spot.name, Toast.LENGTH_SHORT).show()
+            Toast.makeText(v.context, phrase.text, Toast.LENGTH_SHORT).show()
         }
     }
 

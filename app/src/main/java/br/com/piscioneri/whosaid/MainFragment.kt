@@ -39,8 +39,8 @@ class MainFragment : Fragment() {
         cardStackView = card_stack_view
         cardStackView.layoutManager = cardStackLayoutManager
 
-        viewModel.getPhrases().observe(viewLifecycleOwner, Observer { phrases ->
-            cardStackView.adapter = CardStackAdapter(phrases)
+        viewModel.phrases.observe(viewLifecycleOwner, Observer {
+            cardStackView.adapter = CardStackAdapter(it)
         })
 
         btn_swipe.setOnClickListener {
