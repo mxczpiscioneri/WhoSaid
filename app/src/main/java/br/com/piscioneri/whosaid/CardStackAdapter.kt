@@ -15,7 +15,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class CardStackAdapter(
     private val phrases: List<Phrase> = emptyList(),
-    private val onClicked: (answer: Answer) -> Unit
+    private val onClicked: (phrase: Phrase, answer: Answer) -> Unit
 ) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +31,7 @@ class CardStackAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val phrase = phrases[position]
-        holder.text.text = phrase.text
+        holder.text.text = "\"${phrase.text}\""
         holder.sourceName.text = phrase.source?.name
         holder.sourceDescription.text = phrase.source?.description
         Glide.with(holder.image)
@@ -48,11 +48,11 @@ class CardStackAdapter(
             .into(holder.image)
         holder.answer1.text = phrase.answers?.get(0)?.text
         holder.answer1.setOnClickListener {
-            onClicked.invoke(phrase.answers?.get(0)!!)
+            onClicked.invoke(phrase, phrase.answers?.get(0)!!)
         }
         holder.answer2.text = phrase.answers?.get(1)?.text
         holder.answer2.setOnClickListener {
-            onClicked.invoke(phrase.answers?.get(1)!!)
+            onClicked.invoke(phrase, phrase.answers?.get(1)!!)
         }
     }
 
