@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.piscioneri.whosaid.data.Answer
 import br.com.piscioneri.whosaid.data.Phrase
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class CardStackAdapter(
     private val phrases: List<Phrase> = emptyList(),
@@ -34,6 +36,15 @@ class CardStackAdapter(
         holder.sourceDescription.text = phrase.source?.description
         Glide.with(holder.image)
             .load(phrase.image)
+            .apply(
+                bitmapTransform(
+                    RoundedCornersTransformation(
+                        32,
+                        0,
+                        RoundedCornersTransformation.CornerType.ALL
+                    )
+                )
+            )
             .into(holder.image)
         holder.answer1.text = phrase.answers?.get(0)?.text
         holder.answer1.setOnClickListener {

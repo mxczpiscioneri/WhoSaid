@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import br.com.piscioneri.whosaid.data.Answer
 import com.yuyakaido.android.cardstackview.*
+import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -25,6 +27,8 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity).setSupportActionBar(app_bar)
+
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -36,7 +40,7 @@ class MainFragment : Fragment() {
 
     private fun setupCardStack() {
         cardStackLayoutManager = CardStackLayoutManager(requireContext())
-        cardStackLayoutManager.setStackFrom(StackFrom.Right)
+        cardStackLayoutManager.setMaxDegree(0f)
         cardStackLayoutManager.setSwipeableMethod(SwipeableMethod.Automatic)
 
         cardStackView = card_stack_view
@@ -50,6 +54,7 @@ class MainFragment : Fragment() {
             } else {
                 val setting = SwipeAnimationSetting.Builder()
                     .setDirection(Direction.Left)
+                    .setDuration(Duration.Slow.duration)
                     .build()
 
                 cardStackLayoutManager.setSwipeAnimationSetting(setting)
