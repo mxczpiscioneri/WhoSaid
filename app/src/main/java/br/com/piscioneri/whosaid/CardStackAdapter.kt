@@ -22,7 +22,7 @@ class CardStackAdapter(
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(
             inflater.inflate(
-                R.layout.item_spot,
+                R.layout.item_phrase,
                 parent,
                 false
             )
@@ -46,13 +46,13 @@ class CardStackAdapter(
                 )
             )
             .into(holder.image)
-        holder.answer1.text = phrase.answers?.get(0)?.text
+        holder.answer1.text = phrase.answer?.get(0)?.text
         holder.answer1.setOnClickListener {
-            onClicked.invoke(phrase, phrase.answers?.get(0)!!)
+            onClicked.invoke(phrase, phrase.answer?.get(0)!!)
         }
-        holder.answer2.text = phrase.answers?.get(1)?.text
+        holder.answer2.text = phrase.answer?.get(1)?.text
         holder.answer2.setOnClickListener {
-            onClicked.invoke(phrase, phrase.answers?.get(1)!!)
+            onClicked.invoke(phrase, phrase.answer?.get(1)!!)
         }
     }
 

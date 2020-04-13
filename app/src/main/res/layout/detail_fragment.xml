@@ -7,10 +7,10 @@
     android:layout_marginTop="56dp"
     tools:context=".MainFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/card_stack_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp" />
+        android:clipToPadding="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
