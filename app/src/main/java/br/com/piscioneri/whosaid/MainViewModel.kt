@@ -15,7 +15,7 @@ class MainViewModel : ViewModel() {
         getQuiz()
     }
 
-    private fun getQuiz() {
+    fun getQuiz() {
         FirebaseFirestore.getInstance().collection("quiz")
             .addSnapshotListener { value, e ->
                 if (e != null) {

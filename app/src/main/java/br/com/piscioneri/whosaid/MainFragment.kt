@@ -29,6 +29,10 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setupQuiz()
+
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getQuiz()
+        }
     }
 
     private fun setupQuiz() {
@@ -48,6 +52,7 @@ class MainFragment : Fragment() {
             val layoutManager = GridLayoutManager(requireContext(), 1)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = QuizAdapter(it, onClicked)
+            swipeRefreshLayout.isRefreshing = false
         })
     }
 }
