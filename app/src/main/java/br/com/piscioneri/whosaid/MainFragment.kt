@@ -45,7 +45,7 @@ class MainFragment : Fragment() {
         }
 
         viewModel.quiz.observe(viewLifecycleOwner, Observer {
-            val layoutManager = GridLayoutManager(requireContext(), 2)
+            val layoutManager = GridLayoutManager(requireContext(), 1)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = QuizAdapter(it, onClicked)
         })
