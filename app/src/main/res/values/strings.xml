@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Quem disse?</string>
-    <string name="right">Acertou!</string>
-    <string name="wrong">Errou!</string>
-    <string name="next">Próximo</string>
-    <string name="initial_screen">Voltar para tela inicial</string>
-    <string name="result">Resultado!</string>
+    <string name="right">ACERTOU</string>
+    <string name="wrong">ERROU</string>
+    <string name="next">PRÓXIMO</string>
+    <string name="initial_screen">FECHAR</string>
+    <string name="result">RESULTADO</string>
+    <string name="save">SALVAR</string>
+    <string name="save_in_ranking">SALVAR NO RANKING</string>
+    <string name="input_name">Digite seu nome...</string>
 </resources>
