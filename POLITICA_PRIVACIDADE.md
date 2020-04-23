@@ -12,7 +12,7 @@ Política de privacidade de provedores de serviços de terceiros usados pelo apl
 - Firebase Analytics
 - Firebase Crashlytics
 - Firebase Perf
-- Firebase Perf
+- Firebase Firestore
 
 ### Dados de log
 Queremos informá-lo que, sempre que você visita nosso Serviço, coletamos informações que seu navegador nos envia, chamadas Dados de Log. Esses Dados de registro podem incluir informações como o endereço IP (Internet Protocol) do seu computador, versão do navegador, páginas do Serviço que você visita, hora e data da sua visita, tempo gasto nessas páginas e outras estatísticas.
