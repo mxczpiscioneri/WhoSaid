@@ -8,4 +8,6 @@
     <string name="save">SALVAR</string>
     <string name="save_in_ranking">SALVAR NO RANKING</string>
     <string name="input_name">Digite seu nome...</string>
+    <string name="ranking">ranking</string>
+    <string name="development">Desenvolvido por Matheus Piscioneri e Otavio Abe!</string>
 </resources>

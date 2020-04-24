@@ -3,12 +3,10 @@ package br.com.piscioneri.whosaid
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import br.com.piscioneri.whosaid.data.Answer
-import br.com.piscioneri.whosaid.data.Phrase
-import br.com.piscioneri.whosaid.data.Quiz
+import br.com.piscioneri.whosaid.data.*
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.gson.GsonBuilder
 
 class DetailViewModel : ViewModel() {
@@ -34,19 +32,12 @@ class DetailViewModel : ViewModel() {
     fun saveRanking(quizId: String, currentUser: String, name: String, value: Int) {
         Log.d("MXCZ saveRanking", "$quizId: $name: $value")
 
-        val data = hashMapOf(
-            "name" to name,
-            "score" to value,
-            "timestamp" to FieldValue.serverTimestamp()
-        )
-        val user = hashMapOf(
-            currentUser to data
-        )
+        val data = RankingAnswer(null, currentUser, name, value, Timestamp.now())
 
         FirebaseFirestore.getInstance()
             .collection("ranking")
             .document(quizId)
-            .set(user, SetOptions.merge())
+            .update("answers", FieldValue.arrayUnion(data))
             .addOnSuccessListener {
                 Log.d("MXCZ", "ranking saved")
             }

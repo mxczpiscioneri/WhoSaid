@@ -7,7 +7,7 @@ import br.com.piscioneri.whosaid.data.Quiz
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
-class MainViewModel : ViewModel() {
+class QuizViewModel : ViewModel() {
 
     var quiz: MutableLiveData<List<Quiz>> = MutableLiveData()
 
@@ -17,6 +17,7 @@ class MainViewModel : ViewModel() {
 
     fun getQuiz() {
         FirebaseFirestore.getInstance().collection("quiz")
+            .orderBy("id")
             .addSnapshotListener { value, e ->
                 if (e != null) {
                     Log.w("MXCZ", "Listen failed.", e)

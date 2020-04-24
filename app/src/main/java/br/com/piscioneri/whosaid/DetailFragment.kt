@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,10 +18,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.detail_fragment.*
-import kotlinx.android.synthetic.main.main_activity.*
 import java.util.*
 
-class DetailFragment() : Fragment() {
+class DetailFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private var currentUser: String = UUID.randomUUID().toString()
@@ -36,8 +34,6 @@ class DetailFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AppCompatActivity).setSupportActionBar(app_bar)
-
         return inflater.inflate(R.layout.detail_fragment, container, false)
     }
 
@@ -49,6 +45,10 @@ class DetailFragment() : Fragment() {
         viewModel.getPhrases(quiz)
         setupCardStack()
         login()
+
+        btn_back.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     private fun login() {
@@ -87,7 +87,7 @@ class DetailFragment() : Fragment() {
 
         viewModel.phrases.observe(viewLifecycleOwner, Observer {
             listSize = it.size
-            cardStackView.adapter = CardStackAdapter(it, onClicked)
+            cardStackView.adapter = DetailAdapter(it, onClicked)
         })
     }
 
@@ -147,7 +147,7 @@ class DetailFragment() : Fragment() {
                 backInitialScreen()
             }
             it.setConfirmClickListener { it2 ->
-                viewModel.saveRanking(quiz.id, currentUser!!, editText.text.toString(), value)
+                viewModel.saveRanking(quiz.id, currentUser, editText.text.toString(), value)
                 it2.dismissWithAnimation()
                 backInitialScreen()
             }
