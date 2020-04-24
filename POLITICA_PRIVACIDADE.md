@@ -13,6 +13,7 @@ Política de privacidade de provedores de serviços de terceiros usados pelo apl
 - Firebase Crashlytics
 - Firebase Perf
 - Firebase Firestore
+- Firebase Auth
 
 ### Dados de log
 Queremos informá-lo que, sempre que você visita nosso Serviço, coletamos informações que seu navegador nos envia, chamadas Dados de Log. Esses Dados de registro podem incluir informações como o endereço IP (Internet Protocol) do seu computador, versão do navegador, páginas do Serviço que você visita, hora e data da sua visita, tempo gasto nessas páginas e outras estatísticas.
@@ -40,4 +41,4 @@ Não coletamos intencionalmente informações pessoais identificáveis de crian�
 Podemos atualizar nossa Política de Privacidade periodicamente. Portanto, recomendamos que você reveja esta página periodicamente para quaisquer alterações. Notificaremos você sobre quaisquer alterações, publicando a nova Política de Privacidade nesta página. Essas alterações entram em vigor imediatamente após serem publicadas nesta página.
 
 ### Contate-Nos
-Se você tiver alguma dúvida ou sugestão sobre nossa Política de Privacidade, não hesite em nos contactar pelo e-mail mxczpiscioneri@gmail.com.
+Se você tiver alguma dúvida ou sugestão sobre nossa Política de Privacidade, não hesite em nos contatar pelo e-mail mxczpiscioneri@gmail.com.
